@@ -1,5 +1,11 @@
 server:
   port: 8080
+#  ssl:
+#    key-store: classpath:ssl-certificate.jks
+#    key-store-password: arlington
+#    key-store-type: JKS
+#    key-alias: ssl-certificate
+#    key-password: arlington
 spring:
   datasource:
 #    url: jdbc:mysql://localhost:3306/cloud_project_db
