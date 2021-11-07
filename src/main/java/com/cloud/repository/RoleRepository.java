@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RoleRepository  extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
     @Query("SELECT r from Role r WHERE NOT r.name = 'Admin'")
     List<Role> getRoleDropdown();

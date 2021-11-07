@@ -1,17 +1,15 @@
 package com.cloud.controller;
 
-import com.cloud.entity.Role;
+
 import com.cloud.service.DropdownOptionService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -24,17 +22,17 @@ public class DropdownOptionController {
     @Autowired
     DropdownOptionService dropdownOptionService;
 
-    @GetMapping(value = "/getRoleDropdown")
+    @GetMapping(value = "/get/roles")
     public ResponseEntity<JSONObject> getRoleDropdown(){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
+        return dropdownOptionService.getRoleDropdownList();
+    }
 
-        List<Role> outputData = dropdownOptionService.getRoleDropdownList();
-
-        JSONObject responseData = new JSONObject();
-        responseData.put("message","success");
-        responseData.put("data", outputData);
-
-        return ResponseEntity.status(HttpStatus.OK).body(responseData);
+    @GetMapping(value = "/get/occupant/signup-options")
+    public ResponseEntity<JSONObject> getOccupantSignUpDropdown(){
+        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
+                +" of "+this.getClass().getSimpleName());
+        return dropdownOptionService.getOccupantSignUpDropdowns();
     }
 }
