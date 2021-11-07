@@ -25,6 +25,7 @@ spec:
 #        resources: {}
 #status: {}
 ---
+# Code to create an Internal Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -33,11 +34,11 @@ spec:
   ports:
   - name: 8080-8080
     protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 8080            # This is the service port
+    targetPort: 8080      # This is the port of the pod
   selector:
     app: cloud-spring-boot-app
 #  type: ClusterIP
-  type: LoadBalancer
+#  type: LoadBalancer
 #status:
 #  loadBalancer: {}
