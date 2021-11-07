@@ -22,7 +22,7 @@ public class RoleService {
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
 
-        try{
+        try {
             logger.info("Retrieving all Login records from RDS");
             List<Role> allLoginRecords = roleRepository.findAll();
             logger.info("Successfully retrieved -> "+allLoginRecords.size()+" Roles");
