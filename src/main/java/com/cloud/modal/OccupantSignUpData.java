@@ -20,6 +20,66 @@ public class OccupantSignUpData {
 
     private String updatedAt = "";
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public long getRolesId() {
+        return rolesId;
+    }
+
+    public double getRentMinimum() {
+        return rentMinimum;
+    }
+
+    public double getRentMaximum() {
+        return rentMaximum;
+    }
+
+    public String getLeaseStartDate() {
+        return leaseStartDate;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public long getGenderId() {
+        return genderId;
+    }
+
+    public long getFoodPreferenceId() {
+        return foodPreferenceId;
+    }
+
+    public long getDegreeLevelId() {
+        return degreeLevelId;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

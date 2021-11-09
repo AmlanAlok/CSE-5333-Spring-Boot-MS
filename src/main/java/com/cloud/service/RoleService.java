@@ -14,7 +14,6 @@ public class RoleService {
 
     private static final Logger logger = Logger.getLogger(RoleService.class.getName());
 
-
     @Autowired
     public RoleRepository roleRepository;
 

@@ -1,7 +1,9 @@
 package com.cloud.controller;
 
 import com.cloud.modal.OccupantSignUpData;
+import com.cloud.service.SignUpService;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,9 @@ public class SignUpController {
 
     private static final Logger logger = Logger.getLogger(SignUpController.class.getName());
 
+    @Autowired
+    public SignUpService signUpService;
+
     @PostMapping(value = "/occupant")
 //    public ResponseEntity<JSONObject> getRoleDropdown(){
     public void saveOccupantSignUpData(@RequestBody OccupantSignUpData occupantSignUpData){
@@ -21,6 +26,7 @@ public class SignUpController {
                 +" of "+this.getClass().getSimpleName());
         logger.info(occupantSignUpData.toString());
 
+        signUpService.singUpOccupant(occupantSignUpData);
 //        return dropdownOptionService.getRoleDropdownList();
     }
 
