@@ -2,6 +2,7 @@ package com.cloud.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="users")
@@ -28,21 +29,26 @@ public class User {
     private String phoneNumber;
 
     @Column
+    private int activeStatus;
+
+    @Column
     private Long rolesId;
 
-    @Column
-    private Date createdAt;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
-    @Column
-    private Date updatedAt;
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
-    public User(String firstName, String lastName, String emailId, String password, String phoneNumber, Long rolesId) {
+    public User(String firstName, String lastName, String emailId, String password, String phoneNumber, int activeStatus, Long rolesId, Timestamp createdAt) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.activeStatus = activeStatus;
         this.rolesId = rolesId;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -58,6 +64,7 @@ public class User {
                 ", emailId='" + emailId + '\'' +
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", activeStatus='" + activeStatus + '\'' +
                 ", rolesId=" + rolesId +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

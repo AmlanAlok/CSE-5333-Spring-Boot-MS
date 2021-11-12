@@ -2,6 +2,7 @@ package com.cloud.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="occupants")
@@ -28,10 +29,10 @@ public class Occupant {
     private String country;
 
     @Column
-    private Long gendersId;
+    private Long genderId;
 
     @Column
-    private Long foodPreferencesId;
+    private Long foodPreferenceId;
 
     @Column
     private Long degreeLevelId;
@@ -39,21 +40,22 @@ public class Occupant {
     @Column
     private Long usersId;
 
-    @Column
-    private Date createdAt;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
-    @Column
-    private Date updatedAt;
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
-    public Occupant(Double rentMinimum, Double rentMaximum, Date leaseStartDate, String state, String country, Long gendersId, Long foodPreferencesId, Long degreeLevelId) {
+    public Occupant(Double rentMinimum, Double rentMaximum, Date leaseStartDate, String state, String country, Long genderId, Long foodPreferenceId, Long degreeLevelId, Timestamp createdAt) {
         this.rentMinimum = rentMinimum;
         this.rentMaximum = rentMaximum;
         this.leaseStartDate = leaseStartDate;
         this.state = state;
         this.country = country;
-        this.gendersId = gendersId;
-        this.foodPreferencesId = foodPreferencesId;
+        this.genderId = genderId;
+        this.foodPreferenceId = foodPreferenceId;
         this.degreeLevelId = degreeLevelId;
+        this.createdAt = createdAt;
     }
 
     public void setRentMinimum(Double rentMinimum) {
@@ -76,12 +78,12 @@ public class Occupant {
         this.country = country;
     }
 
-    public void setGenderId(Long gendersId) {
-        this.gendersId = gendersId;
+    public void setGenderId(Long genderId) {
+        this.genderId = genderId;
     }
 
-    public void setFoodPreferenceId(Long foodPreferencesId) {
-        this.foodPreferencesId = foodPreferencesId;
+    public void setFoodPreferenceId(Long foodPreferenceId) {
+        this.foodPreferenceId = foodPreferenceId;
     }
 
     public void setDegreeLevelId(Long degreeLevelId) {
@@ -101,8 +103,8 @@ public class Occupant {
                 ", leaseStartDate=" + leaseStartDate +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
-                ", genderId=" + gendersId +
-                ", foodPreferenceId=" + foodPreferencesId +
+                ", genderId=" + genderId +
+                ", foodPreferenceId=" + foodPreferenceId +
                 ", degreeLevelId=" + degreeLevelId +
                 ", usersId=" + usersId +
                 ", createdAt=" + createdAt +

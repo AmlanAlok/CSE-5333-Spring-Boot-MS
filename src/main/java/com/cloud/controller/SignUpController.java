@@ -20,14 +20,12 @@ public class SignUpController {
     public SignUpService signUpService;
 
     @PostMapping(value = "/occupant")
-//    public ResponseEntity<JSONObject> getRoleDropdown(){
-    public void saveOccupantSignUpData(@RequestBody OccupantSignUpData occupantSignUpData){
+    public ResponseEntity<JSONObject> saveOccupantSignUpData(@RequestBody OccupantSignUpData occupantSignUpData){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
         logger.info(occupantSignUpData.toString());
 
-        signUpService.singUpOccupant(occupantSignUpData);
-//        return dropdownOptionService.getRoleDropdownList();
+        return signUpService.singUpOccupant(occupantSignUpData);
     }
 
 

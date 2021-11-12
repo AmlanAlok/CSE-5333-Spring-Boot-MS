@@ -1,7 +1,6 @@
 package com.cloud.service;
 
 import com.cloud.entity.Occupant;
-import com.cloud.entity.Role;
 import com.cloud.entity.User;
 import com.cloud.modal.OccupantSignUpData;
 import com.cloud.repository.OccupantRepository;
@@ -13,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.List;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +27,7 @@ public class SignUpService {
     @Autowired
     public OccupantRepository occupantRepository;
 
-    public void singUpOccupant(OccupantSignUpData occupantSignUpData){
+    public ResponseEntity<JSONObject> singUpOccupant(OccupantSignUpData occupantSignUpData){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
 
@@ -39,8 +38,12 @@ public class SignUpService {
                 occupantSignUpData.getEmailId(),
                 occupantSignUpData.getPassword(),
                 occupantSignUpData.getPhoneNumber(),
-                occupantSignUpData.getRolesId()
+                1,          // 1 means active, 0 means inactive
+                occupantSignUpData.getRolesId(),
+                new Timestamp(System.currentTimeMillis())
         );
+
+        logger.info(user.toString());
 
         Occupant occupant = new Occupant(occupantSignUpData.getRentMinimum(),
                 occupantSignUpData.getRentMaximum(),
@@ -49,7 +52,9 @@ public class SignUpService {
                 occupantSignUpData.getCountry(),
                 occupantSignUpData.getGenderId(),
                 occupantSignUpData.getFoodPreferenceId(),
-                occupantSignUpData.getDegreeLevelId());
+                occupantSignUpData.getDegreeLevelId(),
+                new Timestamp(System.currentTimeMillis())
+        );
 
         try {
             logger.info("Saving Occupant user data in RDS");
@@ -61,23 +66,22 @@ public class SignUpService {
 
             Occupant occupantRecord = occupantRepository.save(occupant);
             logger.info(occupantRecord.toString());
-//            List<Role> roleDropdownList = roleRepository.getRoleDropdown();
-//            logger.info("Successfully retrieved -> "+roleDropdownList.size()+" Roles");
-//            logger.info(roleDropdownList.toString());
-//
-//            JSONObject roleDropdown = new JSONObject();
-//            roleDropdown.put("roleDropdownList", roleDropdownList);
-//
-//            responseData.put("message","success");
-//            responseData.put("data", roleDropdown);
 
-//            return ResponseEntity.status(HttpStatus.OK).body(responseData);
+            logger.info("Successfully saved occupant with userId = "+userRecord.getId());
+
+            JSONObject userIdObj = new JSONObject();
+            userIdObj.put("userId", userRecord.getId());
+
+            responseData.put("message","success");
+            responseData.put("data", userIdObj);
+
+            return ResponseEntity.status(HttpStatus.OK).body(responseData);
         }
         catch(Exception e){
             logger.log(Level.SEVERE,"Exception occurred while getting all Roles from RDS", e);
             responseData.put("message","failed");
-            responseData.put("error", e);
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
+            responseData.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
         }
     }
 }

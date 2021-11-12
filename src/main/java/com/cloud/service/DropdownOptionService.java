@@ -58,7 +58,7 @@ public class DropdownOptionService {
         catch(Exception e){
             logger.log(Level.SEVERE,"Exception occurred while getting all Roles from RDS", e);
             responseData.put("message","failed");
-            responseData.put("error", e);
+            responseData.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
         }
     }
@@ -82,7 +82,7 @@ public class DropdownOptionService {
         catch(Exception e){
             logger.log(Level.SEVERE,"Exception occurred while getting all Roles from RDS", e);
             responseData.put("message","failed");
-            responseData.put("error", e);
+            responseData.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
         }
     }
