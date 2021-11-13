@@ -40,6 +40,9 @@ public class User {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
+    public User() {
+    }
+
     public User(String firstName, String lastName, String emailId, String password, String phoneNumber, int activeStatus, Long rolesId, Timestamp createdAt) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,6 +56,10 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override
