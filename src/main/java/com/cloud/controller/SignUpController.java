@@ -1,5 +1,6 @@
 package com.cloud.controller;
 
+import com.cloud.modal.LeaseHolderSignUpData;
 import com.cloud.modal.OccupantSignUpData;
 import com.cloud.service.SignUpService;
 import org.json.simple.JSONObject;
@@ -26,6 +27,15 @@ public class SignUpController {
         logger.info(occupantSignUpData.toString());
 
         return signUpService.singUpOccupant(occupantSignUpData);
+    }
+
+    @PostMapping(value = "/leaseHolder")
+    public ResponseEntity<JSONObject> saveLeaseHolderSignUpData(@RequestBody LeaseHolderSignUpData leaseHolderSignUpData){
+        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
+                +" of "+this.getClass().getSimpleName());
+        logger.info(leaseHolderSignUpData.toString());
+
+        return signUpService.singUpLeaseHolder(leaseHolderSignUpData);
     }
 
 
