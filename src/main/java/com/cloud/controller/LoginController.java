@@ -5,11 +5,9 @@ import com.cloud.modal.LoginInput;
 import com.cloud.service.LoginService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @RestController

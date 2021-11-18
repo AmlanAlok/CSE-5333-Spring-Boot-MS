@@ -52,6 +52,7 @@ public class LoginService {
 
             if (Objects.equals(user.getPassword(), loginInput.getPassword())){
                 loginObj.put("loginStatus", "success");
+                loginObj.put("userId", user.getId());
             }
             else{
                 loginObj.put("loginStatus", "failed");
