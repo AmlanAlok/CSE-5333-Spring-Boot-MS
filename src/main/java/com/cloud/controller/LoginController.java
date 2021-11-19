@@ -28,14 +28,4 @@ public class LoginController {
 
         return loginService.loginUser(loginInput);
     }
-
-//    @GetMapping("/getLoginData")
-//    public ResponseEntity<List<Login>> getLoginData(){
-//        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
-//                +" of "+this.getClass().getSimpleName());
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(loginService.getAllLoginData());
-//    }
-
-
 }

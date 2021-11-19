@@ -21,23 +21,6 @@ public class LoginService {
     @Autowired
     public UserRepository userRepository;
 
-//    public List<Login> getAllLoginData(){
-//        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
-//                +" of "+this.getClass().getSimpleName());
-//
-//        try{
-//            logger.info("Retrieving all Login records from RDS");
-//            List<Login> allLoginRecords = loginRepository.findAll();
-//            logger.info("Successfully retrieved -> "+allLoginRecords.size()+" Users");
-//            logger.info(allLoginRecords.toString());
-//            return allLoginRecords;
-//        }
-//        catch(Exception e){
-//            logger.log(Level.SEVERE,"Exception occurred while getting all Users from RDS",e);
-//            throw e;
-//        }
-//    }
-
     public ResponseEntity<JSONObject> loginUser(LoginInput loginInput){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
