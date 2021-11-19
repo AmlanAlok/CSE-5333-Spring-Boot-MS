@@ -35,4 +35,12 @@ public class DropdownOptionController {
                 +" of "+this.getClass().getSimpleName());
         return dropdownOptionService.getOccupantSignUpDropdowns();
     }
+
+    @GetMapping(value = "/get/leaseHolder/signup-options")
+    public ResponseEntity<JSONObject> getLeaseHolderSignUpDropdown(){
+        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
+                +" of "+this.getClass().getSimpleName());
+        return dropdownOptionService.getLeaseHolderSignUpDropdowns();
+    }
+
 }

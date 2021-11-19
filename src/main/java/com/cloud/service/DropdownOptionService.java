@@ -1,13 +1,7 @@
 package com.cloud.service;
 
-import com.cloud.entity.DegreeLevel;
-import com.cloud.entity.FoodPreference;
-import com.cloud.entity.Gender;
-import com.cloud.entity.Role;
-import com.cloud.repository.DegreeLevelRepository;
-import com.cloud.repository.FoodPreferenceRepository;
-import com.cloud.repository.GenderRepository;
-import com.cloud.repository.RoleRepository;
+import com.cloud.entity.*;
+import com.cloud.repository.*;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +28,9 @@ public class DropdownOptionService {
 
     @Autowired
     public DegreeLevelRepository degreeLevelRepository;
+
+    @Autowired
+    public AccommodationNameRepository accommodationNameRepository;
 
     public ResponseEntity<JSONObject> getRoleDropdownList(){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
@@ -63,6 +60,28 @@ public class DropdownOptionService {
         }
     }
 
+    public ResponseEntity<JSONObject> getLeaseHolderSignUpDropdowns(){
+        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
+                +" of "+this.getClass().getSimpleName());
+
+        JSONObject responseData = new JSONObject();
+
+        try {
+            JSONObject dropdownOptions = new JSONObject();
+            dropdownOptions.put("accommodationNameDropdownList", this.getAccommodationNameList());
+            responseData.put("message","success");
+            responseData.put("data", dropdownOptions);
+
+            return ResponseEntity.status(HttpStatus.OK).body(responseData);
+        }
+        catch(Exception e){
+            logger.log(Level.SEVERE,"Exception occurred while getting all Roles from RDS", e);
+            responseData.put("message","failed");
+            responseData.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
+        }
+    }
+
     public ResponseEntity<JSONObject> getOccupantSignUpDropdowns(){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
@@ -80,10 +99,27 @@ public class DropdownOptionService {
             return ResponseEntity.status(HttpStatus.OK).body(responseData);
         }
         catch(Exception e){
-            logger.log(Level.SEVERE,"Exception occurred while getting all Roles from RDS", e);
+            logger.log(Level.SEVERE,"Exception occurred while getting all dropdowns from RDS", e);
             responseData.put("message","failed");
             responseData.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
+        }
+    }
+
+    public List<AccommodationName> getAccommodationNameList(){
+        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
+                +" of "+this.getClass().getSimpleName());
+
+        try {
+            logger.info("Retrieving all accommodation names from RDS");
+            List<AccommodationName> accommodationNameList = accommodationNameRepository.findAll();
+            logger.info("Successfully retrieved -> "+accommodationNameList.size()+" accommodation names");
+            logger.info(accommodationNameList.toString());
+            return accommodationNameList;
+        }
+        catch(Exception e){
+            logger.log(Level.SEVERE,"Exception occurred while getting all accommodation names from RDS",e);
+            throw e;
         }
     }
 
