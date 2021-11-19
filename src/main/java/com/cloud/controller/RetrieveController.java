@@ -31,4 +31,12 @@ public class RetrieveController {
 
         return retrieveService.getAllOccupants();
     }
+
+    @GetMapping("/getAllLeaseHolders")
+    public ResponseEntity<JSONObject> getAllLeaseHolders(){
+        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
+                +" of "+this.getClass().getSimpleName());
+
+        return retrieveService.getAllLeaseHolders();
+    }
 }
