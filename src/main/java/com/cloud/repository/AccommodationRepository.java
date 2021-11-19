@@ -15,6 +15,6 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
     @Query("SELECT new com.cloud.modal.LeaseHolderInfo(u.id as userId, u.firstName, u.lastName, u.emailId, a.bedroomCount, a.bathroomCount, a.vacancyCount, a.rentPerOccupant, a.leaseStartDate, a.leaseEndDate, a.moveInDate, a.distanceFromCampus, a.name, a.address, an.name as furnishingStatus) " +
             "FROM Accommodation a " +
             "JOIN User u ON a.usersId = u.id " +
-            "JOIN AccommodationName an ON a.furnishingStatusId = an.id")
+            "JOIN FurnishingStatus an ON a.furnishingStatusId = an.id")
     List<LeaseHolderInfo> getAllLeaseHolderInfo(@Param("roleName") String roleName);
 }

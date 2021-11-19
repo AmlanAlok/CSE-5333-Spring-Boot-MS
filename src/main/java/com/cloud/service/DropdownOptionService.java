@@ -32,6 +32,9 @@ public class DropdownOptionService {
     @Autowired
     public AccommodationNameRepository accommodationNameRepository;
 
+    @Autowired
+    private FurnishingStatusRepository furnishingStatusRepository;
+
     public ResponseEntity<JSONObject> getRoleDropdownList(){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
@@ -69,6 +72,7 @@ public class DropdownOptionService {
         try {
             JSONObject dropdownOptions = new JSONObject();
             dropdownOptions.put("accommodationNameDropdownList", this.getAccommodationNameList());
+            dropdownOptions.put("furnishingStatusList", this.getFurnishingStatusList());
             responseData.put("message","success");
             responseData.put("data", dropdownOptions);
 
@@ -103,6 +107,23 @@ public class DropdownOptionService {
             responseData.put("message","failed");
             responseData.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
+        }
+    }
+
+    public List<FurnishingStatus> getFurnishingStatusList(){
+        logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
+                +" of "+this.getClass().getSimpleName());
+
+        try {
+            logger.info("Retrieving all furnishing statuses from RDS");
+            List<FurnishingStatus> furnishingStatusList = furnishingStatusRepository.findAll();
+            logger.info("Successfully retrieved -> "+furnishingStatusList.size()+" furnishing statuses");
+            logger.info(furnishingStatusList.toString());
+            return furnishingStatusList;
+        }
+        catch(Exception e){
+            logger.log(Level.SEVERE,"Exception occurred while getting all furnishing statuses from RDS",e);
+            throw e;
         }
     }
 

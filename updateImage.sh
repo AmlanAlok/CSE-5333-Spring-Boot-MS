@@ -7,7 +7,7 @@ gradle clean build
 echo "Building docker image"
 docker build --platform linux/amd64 -t cse-5333-backend .
 
-echo "tagging docker iamge"
+echo "tagging docker image"
 docker tag cse-5333-backend amlanalok/cse-5333-backend
 
 echo "Pushing image to Docker Hub"
