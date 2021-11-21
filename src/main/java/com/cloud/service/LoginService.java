@@ -1,7 +1,9 @@
 package com.cloud.service;
 
+import com.cloud.entity.Role;
 import com.cloud.entity.User;
 import com.cloud.modal.LoginInput;
+import com.cloud.repository.RoleRepository;
 import com.cloud.repository.UserRepository;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class LoginService {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    public RoleRepository roleRepository;
+
     public ResponseEntity<JSONObject> loginUser(LoginInput loginInput){
         logger.info("In "+new Throwable().getStackTrace()[0].getMethodName()
                 +" of "+this.getClass().getSimpleName());
@@ -28,14 +33,18 @@ public class LoginService {
         JSONObject responseData = new JSONObject();
 
         try {
+            logger.info("Getting user by emailId");
             User user = userRepository.findByEmailId(loginInput.getEmail());
             logger.info(user.toString());
 
             JSONObject loginObj = new JSONObject();
 
             if (Objects.equals(user.getPassword(), loginInput.getPassword())){
+
+                Role role = roleRepository.findById(user.getRolesId()).get();
                 loginObj.put("loginStatus", "success");
                 loginObj.put("userId", user.getId());
+                loginObj.put("role", role.getName());
             }
             else{
                 loginObj.put("loginStatus", "failed");

@@ -62,6 +62,10 @@ public class User {
         return password;
     }
 
+    public Long getRolesId() {
+        return rolesId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
