@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.logging.Logger;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
 public class LoginController {
 
