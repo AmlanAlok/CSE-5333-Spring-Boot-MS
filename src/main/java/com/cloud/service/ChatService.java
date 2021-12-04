@@ -1,6 +1,5 @@
 package com.cloud.service;
 
-import com.cloud.modal.ChatInfo;
 import com.cloud.modal.ChatList;
 import com.cloud.modal.ChatMessage;
 import com.cloud.repository.ChatRepository;
@@ -35,7 +34,7 @@ public class ChatService {
 
             chatList.forEach(receiver -> {
                 List<ChatMessage> chatMessageList = chatRepository.getChatMessageListByReceiverId(receiver.getReceiverId());
-                receiver.setChatMessageList(chatMessageList);
+                receiver.setChatMessages(chatMessageList);
             });
 
             JSONObject chats = new JSONObject();
