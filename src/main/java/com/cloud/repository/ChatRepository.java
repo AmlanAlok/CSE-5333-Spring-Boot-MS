@@ -2,6 +2,7 @@ package com.cloud.repository;
 
 import com.cloud.entity.Chat;
 import com.cloud.modal.ChatInfo;
+import com.cloud.modal.ChatList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,11 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
             "WHERE c.senderId = :userId or c.receiverId = :userId " +
             "ORDER By c.id ")
     List<ChatInfo> getChatBySenderId(@Param("userId") Long userId);
+
+    @Query("SELECT DISTINCT new com.cloud.modal.ChatList(c.receiverId, u.firstName, u.lastName) " +
+            "FROM Chat c " +
+            "JOIN User u ON c.receiverId = u.id " +
+            "WHERE c.senderId = :userId " +
+            "ORDER By c.receiverId ")
+    List<ChatList> getChatListBySenderId(@Param("userId") Long userId);
 }
