@@ -2,6 +2,7 @@ package com.cloud.service;
 
 import com.cloud.modal.ChatInfo;
 import com.cloud.modal.ChatList;
+import com.cloud.modal.ChatMessage;
 import com.cloud.repository.ChatRepository;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class ChatService {
             logger.info("Retrieving all chats for a sender from RDS");
 //            List<ChatInfo> chatList = chatRepository.getChatBySenderId(userId);
             List<ChatList> chatList = chatRepository.getChatListBySenderId(userId);
+
+            chatList.forEach(receiver -> {
+                List<ChatMessage> chatMessageList = chatRepository.getChatMessageListByReceiverId(receiver.getReceiverId());
+                receiver.setChatMessageList(chatMessageList);
+            });
 
             JSONObject chats = new JSONObject();
             chats.put("chats", chatList);

@@ -1,10 +1,13 @@
 package com.cloud.modal;
 
+import java.util.List;
+
 public class ChatList {
 
     private long receiverId;
     private String firstName;
     private String lastName;
+    private List<ChatMessage> chatMessageList;
 
     public ChatList(long receiverId, String firstName, String lastName) {
         this.receiverId = receiverId;
@@ -37,5 +40,13 @@ public class ChatList {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<ChatMessage> getChatMessageList() {
+        return chatMessageList;
+    }
+
+    public void setChatMessageList(List<ChatMessage> chatMessageList) {
+        this.chatMessageList = chatMessageList;
     }
 }
