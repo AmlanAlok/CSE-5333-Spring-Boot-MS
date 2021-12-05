@@ -52,6 +52,8 @@ public class LoginService {
             }
 
             loginObj.put("email", loginInput.getEmail());
+            loginObj.put("firstName", user.getFirstName());
+            loginObj.put("lastName", user.getLastName());
             responseData.put("message","success");
             responseData.put("data", loginObj);
 
