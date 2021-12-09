@@ -1,3 +1,14 @@
+# TO RUN ANYWHERE
+
+## We have the docker image on docker hub
+
+amlanalok/cse-5333-backend
+
+## Run the below command to run our docker image
+
+docker run -dp 8080:8080 amlanalok/cse-5333-backend
+
+# To run locally
 
 ### To create a new jar file 
 gradle clean build
@@ -29,9 +40,6 @@ docker run -dp 8080:8080 cse-5333-backend
 ### To see the list of containers running
 docker ps
 
-### The below POST API can be pinged to test if the application is working
-http://127.0.0.1:8080/platform/user/login
-
 ### To check logs in the container
 docker logs <container-id>
 
@@ -56,5 +64,3 @@ sudo docker run -dp 8080:8080 amlanalok/cse-5333-backend
 ### Command to connect the GCP Compute Engine
 gcloud compute ssh cloud-project-vm-1 --zone=us-west1-b
 
-### VM deployment confirmation
-http://34.83.248.35:8080/platform/user/login
